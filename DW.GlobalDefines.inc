@@ -1,12 +1,3 @@
-{*******************************************************}
-{                                                       }
-{         DelphiWorlds Delphi Global Library            }
-{                                                       }
-{          Copyright(c) 2016 David Nottage              }
-{              All rights reserved                      }
-{                                                       }
-{*******************************************************}
-
 // This include file contains defines that are application-wide for DelphiWorlds code
 
 // All DelphiWorlds code makes use of scoped enumerations
