@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2017/04/03 09:34:08.012,S:\DelphiWorlds\Public\PushClient\Demo\PushClientDemo.dproj=S:\DelphiWorlds\Public\PushClient\Demo\PushNotifications.dproj</Transaction>
+  </Transactions>
+  <ActiveMobileDevice>   <PMac iOSSimulator="iPhone5"/>
+  </ActiveMobileDevice>
+</BorlandProject>
