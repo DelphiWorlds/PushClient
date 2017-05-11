@@ -9,4 +9,8 @@ It is strongly suggested that you read this article if you're unfamiliar with se
 
 Usage:
 
-Please refer to the demo. Documentation will come incrementally.
+Please refer to the demo.
+
+NOTE: This project has been put into sleep mode, in preference of the FCMStarter demo in the KastriFree project:
+
+  https://github.com/DelphiWorlds/KastriFree/
