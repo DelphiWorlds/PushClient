@@ -37,6 +37,7 @@ type
     FOnChange: TPushServiceConnection.TChangeEvent;
     FOnReceiveNotification: TPushServiceConnection.TReceiveNotificationEvent;
     FOnRegistrationError: TRegistrationErrorEvent;
+    procedure ActivateAysnc;
     procedure ClearDeviceInfo;
     procedure CreatePushService;
     procedure DoChange(AChange: TPushService.TChanges);
@@ -67,7 +68,7 @@ implementation
 
 uses
   // RTL
-  System.SysUtils,
+  System.SysUtils, System.Threading, System.Classes,
   // FMX
 {$IF Defined(IOS)}
   FMX.PushNotification.iOS;
@@ -118,8 +119,15 @@ end;
 
 procedure TPushClient.DoChange(AChange: TPushService.TChanges);
 begin
+  if FServiceConnection.Active then
+    FDeviceID := FPushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceID];
   if Assigned(FOnChange) then
-    FOnChange(Self, AChange);
+    TThread.Synchronize(nil,
+      procedure
+      begin
+        FOnChange(Self, AChange);
+      end
+    );
 end;
 
 procedure TPushClient.DoRegistrationError(const AError: string);
@@ -180,11 +188,20 @@ procedure TPushClient.SetActive(const Value: Boolean);
 begin
   if Value = FServiceConnection.Active then
     Exit; // <=======
-  FServiceConnection.Active := Value;
-  if FServiceConnection.Active then
-    FDeviceID := FPushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceID]
+  if Value then
+    ActivateAysnc
   else
     ClearDeviceInfo;
+end;
+
+procedure TPushClient.ActivateAysnc;
+begin
+  TTask.Run(
+    procedure
+    begin
+      FServiceConnection.Active := True;
+    end
+  );
 end;
 
 procedure TPushClient.SetGCMAppID(const Value: string);
