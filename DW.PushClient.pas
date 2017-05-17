@@ -34,6 +34,7 @@ type
     FRegisterFCM: TRegisterFCM;
     FServerKey: string;
     FServiceConnection: TPushServiceConnection;
+    FUseSandbox: Boolean;
     FOnChange: TPushServiceConnection.TChangeEvent;
     FOnReceiveNotification: TPushServiceConnection.TReceiveNotificationEvent;
     FOnRegistrationError: TRegistrationErrorEvent;
@@ -58,6 +59,7 @@ type
     property DeviceToken: string read FDeviceToken;
     property GCMAppID: string read GetGCMAppID write SetGCMAppID;
     property PushSystem: TPushSystem read FPushSystem;
+    property UseSandbox: Boolean read FUseSandbox write FUseSandbox;
     property ServerKey: string read FServerKey write FServerKey;
     property OnChange: TPushServiceConnection.TChangeEvent read FOnChange write FOnChange;
     property OnReceiveNotification: TPushServiceConnection.TReceiveNotificationEvent read FOnReceiveNotification write FOnReceiveNotification;
@@ -169,7 +171,7 @@ begin
     LDeviceToken := FPushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
     // If the token needs registration with FCM, FRegisterFCM will be non-nil
     if FRegisterFCM <> nil then
-      FRegisterFCM.RegisterAPNToken(FBundleID, FServerKey, LDeviceToken, True)
+      FRegisterFCM.RegisterAPNToken(FBundleID, FServerKey, LDeviceToken, FUseSandbox)
     else
       FDeviceToken := LDeviceToken;
   end;

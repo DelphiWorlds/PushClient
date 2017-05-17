@@ -44,6 +44,7 @@ begin
   FPushClient.GCMAppID := cFCMSenderID;
   FPushClient.ServerKey := cFCMServerKey;
   FPushClient.BundleID := cFCMBundleID;
+  FPushClient.UseSandbox := True; // Change this to False for production use!
   FPushClient.OnChange := PushClientChangeHandler;
   FPushClient.OnReceiveNotification := PushClientReceiveNotificationHandler;
   FPushClient.Active := True;
