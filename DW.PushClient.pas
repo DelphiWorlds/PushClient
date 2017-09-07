@@ -38,7 +38,7 @@ type
     FOnChange: TPushServiceConnection.TChangeEvent;
     FOnReceiveNotification: TPushServiceConnection.TReceiveNotificationEvent;
     FOnRegistrationError: TRegistrationErrorEvent;
-    procedure ActivateAysnc;
+    procedure ActivateAsync;
     procedure ClearDeviceInfo;
     procedure CreatePushService;
     procedure DoChange(AChange: TPushService.TChanges);
@@ -191,12 +191,12 @@ begin
   if Value = FServiceConnection.Active then
     Exit; // <=======
   if Value then
-    ActivateAysnc
+    ActivateAsync
   else
     ClearDeviceInfo;
 end;
 
-procedure TPushClient.ActivateAysnc;
+procedure TPushClient.ActivateAsync;
 begin
   TTask.Run(
     procedure
